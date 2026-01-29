@@ -14,13 +14,12 @@
 </div>
 
 <script>
-  // Fixed the typo here: changed movieImput to movieInput
   const movieInput = document.getElementById("movie-input"); 
   const addMovieBtn = document.getElementById("add-movie-btn");
   const watchlist = document.getElementById("watchlist");
 
   async function getMovie(movieName) {
-    const urlResponse = await fetch("https://www.omdbapi.com/?t=" + movieName + "&apikey=trilogy");
+    const urlResponse = await fetch("http://www.omdbapi.com/?t="+ movieName +"&apikey=e7e12da0");
     const urlData = await urlResponse.json(); 
     return urlData; 
   }
@@ -28,7 +27,7 @@
   let myWatchlist = JSON.parse(localStorage.getItem("movies")) || [];
 
   addMovieBtn.addEventListener("click", async () => {
-    const movieName = movieInput.value; // Now this matches the variable above
+    const movieName = movieInput.value;
     if (movieName) {
       const movieData = await getMovie(movieName);
       
@@ -36,7 +35,7 @@
         myWatchlist.push(movieData);
         localStorage.setItem("movies", JSON.stringify(myWatchlist));
         renderWatchlist();
-        movieInput.value = ""; // Now this matches too
+        movieInput.value = "";
       } else {
         alert("Movie not found!");
       }
@@ -54,4 +53,4 @@
   renderWatchlist();  
 </script>
 </body>
-</html>
+    </html>
