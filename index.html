@@ -13,44 +13,6 @@
         </ul>
 </div>
 
-<script>
-  const movieInput = document.getElementById("movie-input"); 
-  const addMovieBtn = document.getElementById("add-movie-btn");
-  const watchlist = document.getElementById("watchlist");
-
-  async function getMovie(movieName) {
-    const urlResponse = await fetch("http://www.omdbapi.com/?t="+ movieName +"&apikey=e7e12da0");
-    const urlData = await urlResponse.json(); 
-    return urlData; 
-  }
-
-  let myWatchlist = JSON.parse(localStorage.getItem("movies")) || [];
-
-  addMovieBtn.addEventListener("click", async () => {
-    const movieName = movieInput.value;
-    if (movieName) {
-      const movieData = await getMovie(movieName);
-      
-      if (movieData.Response === "True") {
-        myWatchlist.push(movieData);
-        localStorage.setItem("movies", JSON.stringify(myWatchlist));
-        renderWatchlist();
-        movieInput.value = "";
-      } else {
-        alert("Movie not found!");
-      }
-    }
-  });
-
-  function renderWatchlist() {
-    const html = myWatchlist.map(movie => {
-        return `<li><strong>${movie.Title}</strong> (${movie.Year})</li>`;
-    }).join("");
-    
-    watchlist.innerHTML = html;
-  }
-
-  renderWatchlist();  
-</script>
+<script src="script.js"></script>
 </body>
-    </html>
+</html>
