@@ -1,1 +1,53 @@
-
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#movie-input{
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #ff4a00;
+    margin: 15px 10px;
+    padding: 15px;
+    box-shadow: 3px 5px 8px #ccc;
+    border-radius: 10px;
+}
+button{
+    padding: 10px;
+    margin: 0 15px;
+    border: 0;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+}
+button:hover{
+    padding: 15px;
+}
+#add-movie-btn{
+    background: #ff4a00;
+}
+#reset-btn{
+    background: red;
+}
+#watchlist{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.movie-card{
+    width: 100%;
+    max-width: 320px;
+    margin: 6px auto;
+    padding: 10px 15px;
+    box-shadow: 3px 5px 10px #ccc;
+    border-radius: 6px;
+    }
+.movie-card img{
+    width: 100%;
+    border-radius: 6px;
+}
+.desc{
+    display: flex;
+}
