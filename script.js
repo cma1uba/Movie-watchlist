@@ -6,19 +6,20 @@ async function getMovie(movieName) {
     const urlResponse = await fetch("http://www.omdbapi.com/?t=" + movieName + "&apikey=e7e12da0");
     const urlData = await urlResponse.json(); 
     
-    console.log(urlData);
     return urlData; 
 }
-getMovie("wish");
-let myWatchlist = [];
+
+let myWatchlist = JSON.parse(localStorage.getItem("movies")) || [];
 addMovieBtn.addEventListener("click", async () => {
-    const movieName = movieInput.value;
+    const movieName = movieInput.value.trim();
     if (movieName){
         const movieData = await getMovie(movieName);       
     
         if (movieData.Response === "True"){
             myWatchlist.push(movieData);
+            localStorage.setItem("movies", JSON.stringify(myWatchlist));
             renderWatchlist();
+            movieInput.value = "";
             
         }else{
             alert("movie not found");
@@ -28,7 +29,13 @@ addMovieBtn.addEventListener("click", async () => {
 
 function renderWatchlist(){
     const html = myWatchlist.map(movie =>{
-        return `<li><img src="${movie.Poster}"> <strong>${movie.Title}</strong> (${movie.Year}) ${movie.Rated}</li>`
+        return `<div class="movie-card">
+            <img src="${movie.Poster}" alt="${movie.Title}" style="width: 100px">
+            <div>
+                <strong>${movie.Title}</strong>
+                <p>(${movie.Year})</p>
+            </div>
+            </div>`
     }).join("");
     watchlist.innerHTML = html;
 }
