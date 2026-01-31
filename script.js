@@ -1,6 +1,7 @@
 const movieInput = document.getElementById("movie-input");
 const addMovieBtn = document.getElementById("add-movie-btn");
 const watchlist = document.getElementById("watchlist");
+const resetBtn = document.getElementById("reset-btn");
 
 async function getMovie(movieName) {
     const urlResponse = await fetch("http://www.omdbapi.com/?t=" + movieName + "&apikey=e7e12da0");
@@ -30,10 +31,12 @@ addMovieBtn.addEventListener("click", async () => {
 function renderWatchlist(){
     const html = myWatchlist.map(movie =>{
         return `<div class="movie-card">
-            <img src="${movie.Poster}" alt="${movie.Title}" style="width: 100px">
-            <div>
+            <img src="${movie.Poster}" alt="${movie.Title}">
+            <div class="desc">
                 <strong>${movie.Title}</strong>
-                <p>(${movie.Year})</p>
+                <small>(${movie.Year}) ${movie.Rated}</small>
+                
+                
             </div>
             </div>`
     }).join("");
@@ -41,3 +44,9 @@ function renderWatchlist(){
 }
 
 renderWatchlist();
+
+resetBtn.addEventListener("click", ()=>{
+    myWatchlist = [];
+    localStorage.removeItem("movies");
+    renderWatchlist();
+})
